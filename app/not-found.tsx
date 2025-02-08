@@ -23,7 +23,7 @@ export default function NotFoundPage() {
       </h1>
       {query && (
         <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">
-          "{query}" bo&#39;yicha qidirilgan ma&#39;lumot topilmadi.
+          &quot;{query}&quot; bo&#39;yicha qidirilgan ma&#39;lumot topilmadi.
         </p>
       )}
       <p className="mt-2 text-gray-700 dark:text-gray-400">
