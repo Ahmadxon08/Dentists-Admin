@@ -3,6 +3,7 @@ import ThemeSwitch from "@/components/ThemeSwitch";
 import useStore from "@/store/useStore";
 
 import { Button } from "@mui/material";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 const profileImg = "./images/profile.png";
@@ -47,7 +48,7 @@ const ProfileHead = () => {
     <div className="flex justify-between gap-3 flex-col md:flex-row  bg-white backdrop-blur-lg items-start p-5 border dark:border-none border-gray-200 rounded-2xl dark:bg-slate-800 w-[100%] py-5">
       {/* ** profile picture *** */}
       <div className=" h-auto flex w-full flex-col sm:flex-row   md:w-[44%] gap-6 ">
-        <img
+        <Image
           src={imageSrc || profileImg}
           alt="Profile Image"
           className="rounded-md w-[300px] h-[260px] md:w-[150px] md:h-[150px] "

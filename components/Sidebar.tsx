@@ -6,7 +6,6 @@ import Link from "next/link";
 import { RiMenuFold3Fill, RiMenuUnfold3Fill } from "react-icons/ri";
 import Menu from "@/components/Menu";
 import { IoMdClose } from "react-icons/io";
-import { TbLogout2 } from "react-icons/tb";
 import { FaTooth } from "react-icons/fa";
 
 const Sidebar = () => {

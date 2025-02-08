@@ -1,7 +1,5 @@
 "use client";
 import useStore from "@/store/useStore";
-import React from "react";
-import ThemeSwitch from "./ThemeSwitch";
 import Account from "./Account";
 import { TfiAlignLeft } from "react-icons/tfi";
 

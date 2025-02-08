@@ -1,7 +1,7 @@
 "use client";
 import useAppointmentStore from "@/store/useAppointmentStore";
 import useStore from "@/store/useStore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useFormik } from "formik";
 import { appointmentSchema } from "@/validation/validation";
@@ -40,15 +40,6 @@ const AddModal = () => {
   }, [appointmentDate, appointmentTime]);
 
   // onChange ni formik.handleChange bilan yangilash
-  const handleDateChange = (e: any) => {
-    formik.handleChange(e);
-    useAppointmentStore.setState({ appointmentDate: e.target.value });
-  };
-
-  const handleTimeChange = (e: any) => {
-    formik.handleChange(e);
-    useAppointmentStore.setState({ appointmentTime: e.target.value });
-  };
 
   const { handleSubmit, values, handleBlur, handleChange, touched, errors } =
     formik;
