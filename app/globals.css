@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --background-light: #ffffff;
+  --background-dark: rgb(15, 23, 42);
+}
+html.dark {
+  background-color: var(--background-dark);
+  color: #fff;
+}
+
+/*  */
+::-webkit-scrollbar {
+  width: 8px; /* Scroll bar kengligini sozlash */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3498db; /* Scrollning tutqichining rangi */
+  border-radius: 10px; /* Scrollning tutqichining burchagini yumaloq qilish */
+  border: 2px solid #fff; /* Scrollning tutqichining atrofida oq chiziq */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Scroll trackning rangi */
+  border-radius: 10px; /* Scroll trackning burchagini yumaloq qilish */
+}
+
+/* dark mode uchun pagination ranglarini sozlash */
+
+@layer components {
+  .ContentContainer {
+    @apply w-[100%] h-auto    flex flex-col pb-6  pt-4 gap-5 px-6 md:px-[40px];
+  }
+  .headerActions {
+    @apply flex gap-8 md:gap-0 items-center flex-col md:flex-row dark:bg-slate-800 w-full bg-gray-50 p-2 rounded-md justify-between;
+  }
+  .headerSelectorContainer {
+    @apply flex flex-col gap-5  md:flex-row items-center justify-between md:gap-2 dark:bg-slate-700 bg-white p-2 rounded-md w-full md:w-[45%];
+  }
+  .formInputContainer {
+    @apply flex flex-col w-full md:w-[50%] gap-1;
+  }
+  .inputElement {
+    @apply md:w-[95%] sm:w-full border-2 outline-none pl-2 dark:border-slate-600 dark:bg-slate-800 border-gray-200 h-[44px] rounded-lg;
+  }
+  .searchElement {
+    @apply sm:w-full w-full border-2 outline-none pl-2 dark:border-slate-600 dark:bg-slate-800 border-gray-200 h-[44px] rounded-lg;
+  }
+  .formInputContainerWrapper {
+    @apply flex md:flex-row  gap-3 md:gap-0 flex-col w-[100%];
+  }
+  .label {
+    @apply text-[18px]  w-auto  cursor-pointer;
+  }
+}
+@media (max-width: 768px) {
+  .responsive-table {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .responsive-table thead {
+    display: none;
+  }
+
+  .responsive-table tr {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .responsive-table td {
+    display: flex;
+    align-items: start;
+    padding: 8px 0;
+  }
+
+  .responsive-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 30%;
+  }
+}
