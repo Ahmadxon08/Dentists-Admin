@@ -1,12 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const notFoundPage = "/images/notFound.png";
 
 export default function NotFoundPage() {
-  const router = useRouter();
   const searchParams = new URLSearchParams(
     typeof window !== "undefined" ? window.location.search : ""
   );
@@ -14,7 +13,7 @@ export default function NotFoundPage() {
 
   return (
     <div className="flex flex-col items-center justify-center h-full bg-gray-100 dark:bg-slate-800">
-      <img
+      <Image
         src={notFoundPage}
         alt=""
         className="max-w-[300px] w-full h-[300px] object-cover"

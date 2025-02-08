@@ -1,4 +1,3 @@
-import ButtonItem from "@/components/ButtonItem";
 import HeaderTitle from "@/components/HeaderTitle";
 import MarketTableComponent from "@/components/MarketTableComponent";
 import React from "react";
@@ -15,7 +14,6 @@ const BemorlarPage = () => {
 
       <div className="headerActions">
         <div className="headerSelectorContainer"></div>
-        <ButtonItem label="+ Qo'shish" />
       </div>
       <MarketTableComponent />
     </div>

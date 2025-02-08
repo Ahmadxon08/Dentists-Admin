@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import { useFormik } from "formik";
 import { appointmentSchema } from "@/validation/validation";
 const AddModal = () => {
-  const { addAppointment, appointmentDate, appointmentTime, appointments } =
+  const { addAppointment, appointmentDate, appointmentTime } =
     useAppointmentStore();
 
   const { setModal, isOpenModal } = useStore();
@@ -43,9 +43,6 @@ const AddModal = () => {
 
   const { handleSubmit, values, handleBlur, handleChange, touched, errors } =
     formik;
-
-  console.log("date", appointmentDate);
-  console.log("time", appointmentTime);
 
   return (
     <div

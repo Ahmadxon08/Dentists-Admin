@@ -27,7 +27,7 @@ const CalendarView = () => {
 
   const [weekDays, setWeekDays] = useState<string[]>([]);
   const [view, setView] = useState<"week" | "month">("week");
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const currentDate = new Date();
 
   useEffect(() => {
     const now = new Date();

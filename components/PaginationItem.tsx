@@ -2,19 +2,19 @@ import React from "react";
 import { Pagination } from "@mui/material";
 import useStore from "@/store/useStore";
 
-interface PaginationItemProps {
-  data: any[];
+interface PaginationItemProps<T> {
+  data: T[]; // `any[]` o'rniga generik `T[]` ishlatildi
   itemsPerPage: number;
   handlePageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
   currentPage: number;
 }
 
-const PaginationItem: React.FC<PaginationItemProps> = ({
+const PaginationItem = <T,>({
   data,
   itemsPerPage,
   handlePageChange,
   currentPage,
-}) => {
+}: PaginationItemProps<T>) => {
   const pageCount = data.length > 0 ? Math.ceil(data.length / itemsPerPage) : 1;
 
   const { isDarkMode } = useStore();
