@@ -19,15 +19,16 @@ export default function NotFoundPage() {
         className="max-w-[300px] w-full h-[300px] object-cover"
       />
       <h1 className="text-4xl font-bold text-blue-500">
-        404 - Ma'lumot topilmadi
+        404 - Ma&#39;lumot topilmadi
       </h1>
       {query && (
         <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">
-          "{query}" bo'yicha qidirilgan ma'lumot topilmadi.
+          "{query}" bo&#39;yicha qidirilgan ma&#39;lumot topilmadi.
         </p>
       )}
       <p className="mt-2 text-gray-700 dark:text-gray-400">
-        Uzr, siz qidirayotgan sahifa mavjud emas yoki noto'g'ri URL kiritildi.
+        Uzr, siz qidirayotgan sahifa mavjud emas yoki noto&#39;g&#39;ri URL
+        kiritildi.
       </p>
       <Link
         href="/home"

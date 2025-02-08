@@ -66,7 +66,9 @@ const AddModal = () => {
         className="flex rounded-lg dark:bg-slate-700 h-auto md:h-fit   bg-white   flex-col w-[90%] md:w-[35%] items-center "
       >
         <div className="flex  p-2  w-full justify-between items-center">
-          <h1 className="text-[22px] dark:text-white text-black">Qo'shish</h1>
+          <h1 className="text-[22px] dark:text-white text-black">
+            Qo&#39;shish
+          </h1>
           <button
             onClick={handleClose}
             className=" rounded-md p-[1px] bg-blue-300 "
@@ -136,7 +138,7 @@ const AddModal = () => {
           <div className="w-full flex gap-2">
             <div className="flex w-full gap-1 flex-col">
               <label htmlFor="birthDate" className="label">
-                Tug'ilgan vaqti
+                Tug&#39;ilgan vaqti
               </label>
               <input
                 type="date"
@@ -204,7 +206,7 @@ const AddModal = () => {
             type="submit"
             className="flex w-full items-center justify-center md:w-auto bg-blue-300 py-2 dark:text-blue-600 font-semibold rounded-md text-[#3585ED] px-6"
           >
-            Qo'shish
+            Qo&#39;shish
           </button>
         </form>
         <div className="flex bg-slate-300 mb-2 w-full h-[1px]"></div>
