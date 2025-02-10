@@ -52,7 +52,7 @@ const Sidebar = () => {
     >
       <div
         className={`${
-          isSidebarOpenMenu ? "w-[40%] absolute px-2 " : "w-full"
+          isSidebarOpenMenu ? "w-[60%] absolute px-2 " : "w-full"
         } dark:bg-slate-600 bg-white md:dark:bg-slate-800 px-2 h-[100%]  left-0 justify-end`}
       >
         <div

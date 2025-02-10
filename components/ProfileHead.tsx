@@ -6,10 +6,8 @@ import { Button } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
-const profileImg = "./images/profile.png";
 const ProfileHead = () => {
-  const [imageSrc, setImageSrc] = useState<string>("");
-  const { logOut } = useStore();
+  const { logOut, setImageSrc, imageSrc } = useStore();
 
   // LocalStorage'dan tasvirni olish
   useEffect(() => {
@@ -32,7 +30,6 @@ const ProfileHead = () => {
           const imageUrl = reader.result;
           if (typeof imageUrl === "string") {
             setImageSrc(imageUrl);
-            localStorage.setItem("profileImage", imageUrl);
             console.log(imageUrl);
           }
         };
@@ -49,9 +46,11 @@ const ProfileHead = () => {
       {/* ** profile picture *** */}
       <div className=" h-auto flex w-full flex-col sm:flex-row   md:w-[44%] gap-6 ">
         <Image
-          src={imageSrc || profileImg}
+          src={imageSrc || "/images/profile.png"}
           alt="Profile Image"
-          className="rounded-md w-[300px] h-[260px] md:w-[150px] md:h-[150px] "
+          width={300}
+          height={260}
+          className="rounded-md w-[300px] h-[260px] md:w-[150px] md:h-[150px]"
         />
         <div className="flex items-start justify-between md:gap-3  gap-4 h-auto py-1 flex-col">
           <h1 className="text-[28px] font-semibold dark:text-white text-[black]">

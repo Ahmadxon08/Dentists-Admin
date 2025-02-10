@@ -3,7 +3,7 @@ import ProfileBody from "@/components/ProfileBody";
 import ProfileHead from "@/components/ProfileHead";
 export const generateMetadata = () => {
   return {
-    title: "Profile | VET",
+    title: "Profile | Teeth",
   };
 };
 

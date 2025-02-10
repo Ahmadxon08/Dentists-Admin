@@ -22,6 +22,7 @@ interface AppointmentStore {
   toggleExistingModal: () => void;
   deleteAppointment: () => void;
   setExistingAppointment: (appointment: Appointment | null) => void;
+  setAppointments: (appointments: Appointment[]) => void;
 }
 
 const useAppointmentStore = create<AppointmentStore>((set) => ({
@@ -57,6 +58,8 @@ const useAppointmentStore = create<AppointmentStore>((set) => ({
       ...state,
       appointments: [...state.appointments, appointment],
     })),
+  setAppointments: (newAppointments: Appointment[]) =>
+    set({ appointments: newAppointments }),
 }));
 
 export default useAppointmentStore;

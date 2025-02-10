@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -8,16 +9,22 @@ import Tooltip from "@mui/material/Tooltip";
 import Link from "next/link";
 import { RiAccountPinCircleFill } from "react-icons/ri";
 import { BiLogOut } from "react-icons/bi";
+import useStore from "@/store/useStore";
 
 export default function Account() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { logOut, imageSrc } = useStore();
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // LocalStorage'dan tasvirni olish
+
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -30,7 +37,14 @@ export default function Account() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>A</Avatar>
+            <Avatar
+              sx={{ width: 32, height: 32 }}
+              src={
+                imageSrc.startsWith("data:image")
+                  ? imageSrc
+                  : "/images/profile.png"
+              }
+            />
           </IconButton>
         </Tooltip>
       </Box>
@@ -71,14 +85,18 @@ export default function Account() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <Link href={"/profile"} className="flex items-center gap-2">
+        <MenuItem>
+          <Link
+            href={"/profile"}
+            onClick={handleClose}
+            className="flex items-center gap-2"
+          >
             <RiAccountPinCircleFill size={28} />
             Profile
           </Link>
         </MenuItem>
 
-        <MenuItem onClick={handleClose} className="flex items-center gap-2">
+        <MenuItem onClick={logOut} className="flex items-center gap-2">
           <BiLogOut size={28} />
           Logout
         </MenuItem>
