@@ -17,6 +17,8 @@ const allDays = [
 ];
 
 const CalendarView = () => {
+  const [startHour, setStartHour] = useState("");
+  const [endHour, setEndHour] = useState("");
   const { toggleModal } = useStore();
   const { appointments, setAppointmentDate, setAppointmentTime } =
     useAppointmentStore();
@@ -24,23 +26,6 @@ const CalendarView = () => {
   const [weekDays, setWeekDays] = useState<string[]>([]);
   const [view, setView] = useState<"week" | "month">("week");
   const currentDate = new Date();
-
-  const [startHour, setStartHour] = useState(() => {
-    return localStorage.getItem("startHour") || "05:00";
-  });
-
-  const [endHour, setEndHour] = useState(() => {
-    return localStorage.getItem("endHour") || "23:00";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("startHour", startHour);
-  }, [startHour]);
-
-  useEffect(() => {
-    localStorage.setItem("endHour", endHour);
-  }, [endHour]);
-
   useEffect(() => {
     const savedStartHour = localStorage.getItem("startHour");
     const savedEndHour = localStorage.getItem("endHour");
@@ -48,6 +33,18 @@ const CalendarView = () => {
     if (savedStartHour) setStartHour(savedStartHour);
     if (savedEndHour) setEndHour(savedEndHour);
   }, []);
+  useEffect(() => {
+    if (startHour) {
+      localStorage.setItem("startHour", startHour);
+    }
+  }, [startHour]);
+
+  // endHour o'zgarganda localStorage'ga saqlash
+  useEffect(() => {
+    if (endHour) {
+      localStorage.setItem("endHour", endHour);
+    }
+  }, [endHour]);
 
   const generateHours = () => {
     const start = parseInt(startHour.split(":")[0], 10);
@@ -291,14 +288,25 @@ const CalendarView = () => {
                   : getMonthDays().map((date) => (
                       <td
                         key={`${date}-${hour}`}
-                        className={`p-2 border border-gray-300 text-center cursor-pointer ${
-                          isBooked(date, hour)
-                            ? "bg-red-200 dark:bg-slate-600 dark:text-white"
-                            : "dark:hover:bg-slate-400 hover:bg-blue-200"
-                        }`}
-                        onClick={() => handleOpenModal(date, hour)}
+                        className={`p-2 border border-gray-300 text-center cursor-pointer
+    ${
+      isBooked(date, hour) ? "bg-red-200 dark:bg-slate-600 dark:text-white" : ""
+    }
+    ${
+      isPastTime(date, hour)
+        ? "bg-gray-300 text-gray-500 opacity-50 pointer-events-none"
+        : "dark:hover:bg-slate-400  hover:bg-blue-200"
+    }
+  `}
+                        onClick={() =>
+                          !isPastTime(date, hour) && handleOpenModal(date, hour)
+                        }
                       >
-                        {isBooked(date, hour) ? "📌 Band" : ""}
+                        {isPastTime(date, hour)
+                          ? "❌"
+                          : isBooked(date, hour)
+                          ? "📌 Band"
+                          : ""}{" "}
                       </td>
                     ))}
               </tr>
