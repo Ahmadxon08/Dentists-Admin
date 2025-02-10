@@ -4,7 +4,6 @@ import ExistingAppointmentModal from "@/components/ExistModal";
 import { months } from "@/data/data";
 import useAppointmentStore from "@/store/useAppointmentStore";
 import useStore from "@/store/useStore";
-import useTimeStore from "@/store/useTimeStore";
 import React, { useEffect, useState } from "react";
 
 const allDays = [
@@ -26,7 +25,6 @@ const CalendarView = () => {
   const [view, setView] = useState<"week" | "month">("week");
   const currentDate = new Date();
 
-  // Boshlanish va tugash vaqtlarini saqlash uchun state
   const [startHour, setStartHour] = useState(() => {
     return localStorage.getItem("startHour") || "05:00";
   });
@@ -35,7 +33,6 @@ const CalendarView = () => {
     return localStorage.getItem("endHour") || "23:00";
   });
 
-  // Vaqtlar o'zgarganda localStorage'ga saqlash
   useEffect(() => {
     localStorage.setItem("startHour", startHour);
   }, [startHour]);
@@ -52,7 +49,6 @@ const CalendarView = () => {
     if (savedEndHour) setEndHour(savedEndHour);
   }, []);
 
-  // Vaqt massivini yaratish
   const generateHours = () => {
     const start = parseInt(startHour.split(":")[0], 10);
     const end = parseInt(endHour.split(":")[0], 10);
@@ -103,8 +99,6 @@ const CalendarView = () => {
     );
 
     if (existingAppointment) {
-      console.log("Band bo'lgan vaqt:", existingAppointment);
-
       setExistingAppointment(existingAppointment);
       toggleExistingModal();
     } else {
@@ -136,6 +130,7 @@ const CalendarView = () => {
 
     return false;
   };
+
   const removePastAppointments = () => {
     const now = new Date();
     const currentDate = now.toISOString().split("T")[0];
