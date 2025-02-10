@@ -7,11 +7,6 @@ import useStore from "@/store/useStore";
 import useTimeStore from "@/store/useTimeStore";
 import React, { useEffect, useState } from "react";
 
-const hours = Array.from(
-  { length: 10 }, // 5:00 dan 00:00 gacha 20 ta vaqt bo'ladi
-  (_, i) => `${String(i + 5).padStart(2, "0")}:00`
-);
-
 const allDays = [
   "Yakshanba",
   "Dushanba",
@@ -23,8 +18,6 @@ const allDays = [
 ];
 
 const CalendarView = () => {
-  const { times, addTime, removeTime } = useTimeStore(); // Zustand store'ni chaqiramiz
-
   const { toggleModal } = useStore();
   const { appointments, setAppointmentDate, setAppointmentTime } =
     useAppointmentStore();
@@ -32,14 +25,6 @@ const CalendarView = () => {
   const [weekDays, setWeekDays] = useState<string[]>([]);
   const [view, setView] = useState<"week" | "month">("week");
   const currentDate = new Date();
-  const [newTime, setNewTime] = useState("");
-
-  const handleAddTime = () => {
-    if (newTime && !times.includes(newTime)) {
-      addTime(newTime);
-      setNewTime(""); // Inputni tozalash
-    }
-  };
 
   // Boshlanish va tugash vaqtlarini saqlash uchun state
   const [startHour, setStartHour] = useState(() => {

@@ -4,12 +4,11 @@ import useStore from "@/store/useStore";
 
 import { Button } from "@mui/material";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BiLogOut } from "react-icons/bi";
 const ProfileHead = () => {
   const { logOut, setImageSrc, imageSrc } = useStore();
 
-  // LocalStorage'dan tasvirni olish
   useEffect(() => {
     const savedImage = localStorage.getItem("profileImage");
     if (savedImage) {
