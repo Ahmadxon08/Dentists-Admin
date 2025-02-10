@@ -10,11 +10,14 @@ const ProfileHead = () => {
   const { logOut, setImageSrc, imageSrc } = useStore();
 
   useEffect(() => {
-    const savedImage = localStorage.getItem("profileImage");
-    if (savedImage) {
-      setImageSrc(savedImage);
+    if (typeof window !== "undefined") {
+      const savedImage = localStorage.getItem("profileImage");
+      if (savedImage) {
+        setImageSrc(savedImage);
+      }
     }
-  }, []);
+  }, [setImageSrc]);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -29,7 +32,10 @@ const ProfileHead = () => {
           const imageUrl = reader.result;
           if (typeof imageUrl === "string") {
             setImageSrc(imageUrl);
-            console.log(imageUrl);
+
+            if (typeof window !== "undefined") {
+              localStorage.setItem("profileImage", imageUrl);
+            }
           }
         };
         reader.readAsDataURL(file);
@@ -39,7 +45,12 @@ const ProfileHead = () => {
 
   const onlogOut = () => {
     logOut();
+
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("profileImage");
+    }
   };
+
   return (
     <div className="flex justify-between gap-3 flex-col md:flex-row  bg-white backdrop-blur-lg items-start p-5 border dark:border-none border-gray-200 rounded-2xl dark:bg-slate-800 w-[100%] py-5">
       {/* ** profile picture *** */}
