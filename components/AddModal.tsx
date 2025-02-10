@@ -21,6 +21,7 @@ const AddModal = () => {
       lastName: "",
       address: "",
       birthDate: "",
+      price: Number("1000"),
       appointmentDate: appointmentDate || "",
       appointmentTime: appointmentTime || "",
       doctor: "",
@@ -29,6 +30,7 @@ const AddModal = () => {
     onSubmit: (values) => {
       addAppointment(values);
       formik.resetForm();
+      handleClose();
     },
   });
   useEffect(() => {
@@ -38,8 +40,6 @@ const AddModal = () => {
       appointmentTime,
     }));
   }, [appointmentDate, appointmentTime]);
-
-  // onChange ni formik.handleChange bilan yangilash
 
   const { handleSubmit, values, handleBlur, handleChange, touched, errors } =
     formik;
@@ -57,7 +57,7 @@ const AddModal = () => {
         isOpenModal
           ? " w-full flex z-[1111] absolute top-0 ring-0 left-0"
           : "hidden"
-      } dark:bg-[#000000e8]  bg-[#000000b3] items-center   justify-center md:justify-center p-2 h-full `}
+      } dark:bg-[#000000e8]  bg-[#000000b3] items-center justify-center md:justify-center p-2 h-auto min-h-full `}
     >
       <div
         onClick={(e) => {
@@ -100,7 +100,7 @@ const AddModal = () => {
             {touched.firstName && errors.firstName && (
               <span className="text-red-500 text-sm">{errors.firstName}</span>
             )}
-          </div>{" "}
+          </div>
           <div className="flex w-full gap-1 flex-col">
             <label htmlFor="lastName" className="label">
               Bemor Familiya
@@ -134,7 +134,24 @@ const AddModal = () => {
             {touched.address && errors.address && (
               <span className="text-red-500 text-sm">{errors.address}</span>
             )}
-          </div>{" "}
+          </div>
+          <div className="flex w-full gap-1 flex-col">
+            <label htmlFor="price" className="label">
+              Xizmat narxi
+            </label>
+            <input
+              type="number"
+              id="price"
+              value={values.price}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="Xizmat narxi"
+              className="flex  w-full  dark:bg-slate-500 outline-none p-[2px] px-[12px] py-1 md:py-1 justify-between items-center rounded-[8px] bg-[rgba(0,0,0,0.03)] shadow-xs"
+            />
+            {touched.price && errors.price && (
+              <span className="text-red-500 text-sm">{errors.price}</span>
+            )}
+          </div>
           <div className="w-full flex gap-2">
             <div className="flex w-full gap-1 flex-col">
               <label htmlFor="birthDate" className="label">

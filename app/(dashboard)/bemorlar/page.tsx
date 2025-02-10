@@ -10,11 +10,8 @@ export const generateMetadata = () => {
 const BemorlarPage = () => {
   return (
     <div className="ContentContainer">
-      <HeaderTitle title={"Marketlar"} />
+      <HeaderTitle title={"Bemorlar"} />
 
-      <div className="headerActions">
-        <div className="headerSelectorContainer"></div>
-      </div>
       <MarketTableComponent />
     </div>
   );

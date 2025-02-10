@@ -8,6 +8,7 @@ interface Appointment {
   appointmentDate: string;
   appointmentTime: string;
   doctor: string;
+  price: number;
 }
 
 interface AppointmentStore {

@@ -15,6 +15,10 @@ export const appointmentSchema = yup.object().shape({
     .string()
     .min(5, "Manzil kamida 5 ta belgi bo‘lishi kerak")
     .required("Manzil majburiy"),
+  price: yup
+    .number()
+    .min(1000, "Narxi kamida 1000 sum  bo‘lishi kerak")
+    .required("Narxi majburiy"),
   birthDate: yup
     .date()
     .max(new Date(), "Tug‘ilgan sana kelajak bo‘lishi mumkin emas")

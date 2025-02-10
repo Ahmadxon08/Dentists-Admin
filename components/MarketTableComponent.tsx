@@ -36,6 +36,7 @@ const MarketTableComponent = () => {
               <th className="py-2 px-4 text-left">Manzil</th>
               <th className="py-2 px-4 text-left">Kelish kuni</th>
               <th className="py-2 px-4 text-left">Kelish vaqti</th>
+              <th className="py-2 px-4 text-left">Xizmat narxi</th>
             </tr>
           </thead>
           <tbody>
@@ -64,6 +65,9 @@ const MarketTableComponent = () => {
                 </td>
                 <td data-label="Kelish soati" className="py-2 px-4">
                   {row.appointmentTime}
+                </td>
+                <td data-label="Kelish soati" className="py-2 px-4">
+                  {row.price}
                 </td>
               </tr>
             ))}
