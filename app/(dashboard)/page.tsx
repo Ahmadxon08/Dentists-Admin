@@ -1,5 +1,6 @@
 "use client";
 import AddModal from "@/components/AddModal";
+import Auth from "@/components/Auth";
 import ExistingAppointmentModal from "@/components/ExistModal";
 import { months } from "@/data/data";
 import useAppointmentStore from "@/store/useAppointmentStore";
@@ -16,7 +17,7 @@ const allDays = [
   "Shanba",
 ];
 
-const CalendarView = () => {
+const Home = () => {
   const [startHour, setStartHour] = useState("");
   const [endHour, setEndHour] = useState("");
   const { toggleModal } = useStore();
@@ -219,7 +220,7 @@ const CalendarView = () => {
         <table className="w-full border-collapse border border-gray-300">
           <thead className="md:z-10 top-0 bg-gray-100 dark:bg-slate-800 dark:text-white z-10">
             <tr>
-              <th className="p-2 border border-gray-300 sticky -left-1 bg-gray-100 dark:bg-slate-900 z-20">
+              <th className="p-2 border border-gray-300 sticky -left-1 bg-gray-100 dark:bg-slate-800 z-20">
                 Vaqt
               </th>
               {view === "week"
@@ -248,7 +249,7 @@ const CalendarView = () => {
           <tbody className="overflow-auto">
             {hours.map((hour) => (
               <tr key={hour} className="border border-gray-300">
-                <td className="p-2 border border-gray-300 bg-gray-100 dark:bg-slate-900 sticky -left-1 z-10">
+                <td className="p-2 border border-gray-300 bg-gray-100 dark:bg-slate-800 sticky -left-1 z-10">
                   {hour}
                 </td>
                 {view === "week"
@@ -321,4 +322,4 @@ const CalendarView = () => {
   );
 };
 
-export default CalendarView;
+export default Auth(Home);

@@ -11,7 +11,7 @@ export const generateMetadata = () => {
 const BemorlarPage = () => {
   return (
     <div className="ContentContainer">
-      <HeaderTitle title={"Bemorlar"} />
+      <HeaderTitle title={"Qarzdorlar"} />
 
       <MarketTableComponent />
       <DeleteAppointment />

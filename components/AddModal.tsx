@@ -22,6 +22,7 @@ const AddModal = () => {
       address: "",
       birthDate: "",
       price: Number("1000"),
+      description: "",
       appointmentDate: appointmentDate || "",
       appointmentTime: appointmentTime || "",
       doctor: "",
@@ -77,13 +78,7 @@ const AddModal = () => {
           </button>
         </div>
         <div className="flex bg-slate-300 w-full h-[1px]"></div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-          className="items-start border dark:border-none  flex-col gap-3 flex w-full px-3 py-2"
-        >
+        <form className="items-start border dark:border-none  flex-col gap-3 flex w-full px-3 py-2">
           <div className="flex w-full gap-1 flex-col">
             <label htmlFor="firstName" className="label">
               Bemor Ismi
@@ -164,7 +159,9 @@ const AddModal = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="2025-01-01"
-                className="flex  w-full  dark:bg-slate-500 outline-none p-[2px] px-[12px] py-1 md:py-1 justify-between items-center rounded-[8px] bg-[rgba(0,0,0,0.03)] shadow-xs"
+                className="w-full appearance-auto dark:bg-slate-500 outline-none 
+             p-[2px] px-[12px] py-1 md:py-1 rounded-[8px] 
+             bg-[rgba(0,0,0,0.03)] shadow-xs   pr-3"
               />
               {touched.birthDate && errors.birthDate && (
                 <span className="text-red-500 text-sm">{errors.birthDate}</span>
@@ -181,7 +178,9 @@ const AddModal = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="2025-01-01"
-                className="flex  w-full  dark:bg-slate-500 outline-none p-[2px] px-[12px] py-1 md:py-1 justify-between items-center rounded-[8px] bg-[rgba(0,0,0,0.03)] shadow-xs"
+                className="w-full appearance-auto dark:bg-slate-500 outline-none 
+             p-[2px] px-[12px] py-1 md:py-1 rounded-[8px] 
+             bg-[rgba(0,0,0,0.03)] shadow-xs   pr-3"
               />
             </div>{" "}
           </div>
@@ -214,26 +213,48 @@ const AddModal = () => {
                 id="appointmentTime"
                 value={formik.values.appointmentTime}
                 onChange={handleChange}
-                placeholder="2025-01-01"
-                className="flex  w-full  dark:bg-slate-500 outline-none p-[2px] px-[12px] py-1 md:py-1 justify-between items-center rounded-[8px] bg-[rgba(0,0,0,0.03)] shadow-xs"
+                className="w-full appearance-auto dark:bg-slate-500 outline-none 
+             p-[2px] px-[12px] py-1 md:py-1 rounded-[8px] 
+             bg-[rgba(0,0,0,0.03)] shadow-xs   pr-3"
               />
             </div>{" "}
           </div>
-          <button
-            type="submit"
-            className="flex w-full items-center justify-center md:w-auto bg-blue-300 py-2 dark:text-blue-600 font-semibold rounded-md text-[#3585ED] px-6"
-          >
-            Qo&#39;shish
-          </button>
+          <div className="flex w-full gap-1 flex-col">
+            <label htmlFor="description" className="label">
+              Qo‘shimcha izoh
+            </label>
+            <textarea
+              id="description"
+              value={values.description}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="Qo‘shimcha izoh kiriting..."
+              className="flex w-full dark:bg-slate-500 outline-none p-[2px] px-[12px] py-1 md:py-1 
+               justify-between items-center rounded-[8px] bg-[rgba(0,0,0,0.03)] shadow-xs"
+            />
+            {touched.description && errors.description && (
+              <span className="text-red-500 text-sm">{errors.description}</span>
+            )}
+          </div>
         </form>
         <div className="flex bg-slate-300 mb-2 w-full h-[1px]"></div>
         <div
           className="flex items
         onBlur={handleBlur}-center w-full p-3 justify-end  flex-col md:flex-row gap-3"
         >
+          {" "}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+            className="flex w-full items-center hover:bg-blue-600 duration-200 justify-center md:w-auto bg-blue-300 py-2 dark:text-blue-600 dark:hover:text-blue-100  font-semibold rounded-md text-[#3585ED] px-6"
+          >
+            Qo&#39;shish
+          </button>
           <button
             onClick={handleClose}
-            className="flex w-full items-center justify-center  md:w-auto bg-gray-100 py-2  font-semibold rounded-md text-[#3585ED] px-6"
+            className="flex w-full items-center justify-center dark:hover:bg-gray-500 dark:hover:text-blue-100  duration-200 md:w-auto bg-gray-100 py-2  font-semibold rounded-md text-[#3585ED] px-6"
           >
             Bekor qilish
           </button>{" "}

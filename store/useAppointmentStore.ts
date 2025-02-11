@@ -9,12 +9,14 @@ interface Appointment {
   appointmentTime: string;
   doctor: string;
   price: number;
+  description: string;
 }
 
 interface AppointmentStore {
   appointments: Appointment[];
   appointmentDate: string;
   appointmentTime: string;
+  isOpenDeleteModal: boolean;
   setAppointmentDate: (date: string) => void;
   setAppointmentTime: (time: string) => void;
   addAppointment: (appointment: Appointment) => void;
@@ -22,17 +24,23 @@ interface AppointmentStore {
   existingAppointment: Appointment | null;
   toggleExistingModal: () => void;
   deleteAppointment: () => void;
+  handleDeleteIsModal: () => void;
+
   setExistingAppointment: (appointment: Appointment | null) => void;
   setAppointments: (appointments: Appointment[]) => void;
 }
 
 const useAppointmentStore = create<AppointmentStore>((set) => ({
   appointments: [],
-  appointmentDate: "", // ✅ Store ichida mavjud
-  appointmentTime: "", // ✅ Store ichida mavjud
+  appointmentDate: "",
+  appointmentTime: "",
 
   isExistingModalOpen: false,
   existingAppointment: null,
+
+  isOpenDeleteModal: false,
+  handleDeleteIsModal: () =>
+    set((state) => ({ isOpenDeleteModal: !state.isOpenDeleteModal })),
 
   toggleExistingModal: () =>
     set((state) => ({ isExistingModalOpen: !state.isExistingModalOpen })),

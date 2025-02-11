@@ -67,6 +67,7 @@ const useStore = create<StoreState>((set) => ({
   logOut: () => {
     localStorage.clear();
     set({ isAuthenticated: false });
+    window.location.href = "/login";
   },
 
   imageSrc: "",
