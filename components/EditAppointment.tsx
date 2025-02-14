@@ -1,15 +1,19 @@
 "use client";
 import useAppointmentStore from "@/store/useAppointmentStore";
-import useStore from "@/store/useStore";
 import React, { useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useFormik } from "formik";
 import { appointmentSchema } from "@/validation/validation";
-const AddModal = () => {
-  const { addAppointment, appointmentDate, appointmentTime } =
-    useAppointmentStore();
-
-  const { setModal, isOpenModal } = useStore();
+const EditAppointment = () => {
+  const {
+    appointmentDate,
+    isEditOpenModal,
+    setEditOpenModal,
+    appointmentTime,
+    updateAppointment,
+    editAppointment,
+    forCurrencyUz,
+  } = useAppointmentStore();
 
   const formik = useFormik({
     initialValues: {
@@ -17,7 +21,7 @@ const AddModal = () => {
       lastName: "",
       address: "",
       birthDate: "",
-      price: Number(""),
+      price: Number("1000"),
       givenPrice: Number(""),
       tel: "",
       description: "",
@@ -27,25 +31,40 @@ const AddModal = () => {
     },
     validationSchema: appointmentSchema,
     onSubmit: (values) => {
-      addAppointment(values);
+      if (editAppointment && editAppointment.id) {
+        updateAppointment(editAppointment.id, values);
+      }
       formik.resetForm();
       handleClose();
     },
   });
+
   useEffect(() => {
-    formik.setValues((prevValues) => ({
-      ...prevValues,
-      appointmentDate,
-      appointmentTime,
-    }));
-  }, [appointmentDate, appointmentTime]);
+    if (editAppointment) {
+      console.log("edit appointment", editAppointment);
+      formik.setValues({
+        firstName: editAppointment.firstName || "",
+        lastName: editAppointment.lastName || "",
+        address: editAppointment.address || "",
+        birthDate: editAppointment.birthDate || "",
+        price: editAppointment.price || 1000,
+        tel: editAppointment.tel || "",
+        givenPrice: editAppointment.givenPrice || 0,
+        description: editAppointment.description || "",
+        appointmentDate:
+          appointmentDate || editAppointment.appointmentDate || "",
+        appointmentTime:
+          appointmentTime || editAppointment.appointmentTime || "",
+        doctor: editAppointment.doctor || "",
+      });
+    }
+  }, [editAppointment, appointmentDate, appointmentTime]);
 
   const { handleSubmit, values, handleBlur, handleChange, touched, errors } =
     formik;
   const handleClose = () => {
     formik.resetForm();
-
-    setModal(false);
+    setEditOpenModal(false);
   };
 
   return (
@@ -53,12 +72,12 @@ const AddModal = () => {
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (isOpenModal) {
-          setModal(false);
+        if (isEditOpenModal) {
+          setEditOpenModal(false);
         }
       }}
       className={` ${
-        isOpenModal
+        isEditOpenModal
           ? " w-full flex z-[1111] absolute top-0 ring-0 left-0"
           : "hidden"
       } dark:bg-[#000000e8]  bg-[#000000b3] items-center justify-center md:justify-center p-2 h-auto min-h-full `}
@@ -71,7 +90,7 @@ const AddModal = () => {
       >
         <div className="flex  p-2  w-full justify-between items-center">
           <h1 className="text-[22px] dark:text-white text-black">
-            Bemor qo&#39;shish
+            Bemorni tahrirlash
           </h1>
           <button
             onClick={handleClose}
@@ -133,22 +152,43 @@ const AddModal = () => {
               <span className="text-red-500 text-sm">{errors.address}</span>
             )}
           </div>
-          <div className="flex w-full gap-1 flex-col">
-            <label htmlFor="price" className="label">
-              Xizmat narxi
-            </label>
-            <input
-              type="number"
-              id="price"
-              value={values.price}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="Xizmat narxi"
-              className="flex  w-full  dark:bg-slate-500 outline-none p-[2px] px-[12px] py-1 md:py-1 justify-between items-center rounded-[8px] bg-[rgba(0,0,0,0.03)] shadow-xs"
-            />
-            {touched.price && errors.price && (
-              <span className="text-red-500 text-sm">{errors.price}</span>
-            )}
+          <div className="w-full flex gap-2">
+            <div className="flex w-full gap-1 flex-col">
+              <label htmlFor="price" className="label">
+                Umumiy xizmat narxi
+              </label>
+              <input
+                type="number"
+                id="price"
+                value={values.price}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Xizmat narxi"
+                className="flex  w-full  dark:bg-slate-500 outline-none p-[2px] px-[12px] py-1 md:py-1 justify-between items-center rounded-[8px] bg-[rgba(0,0,0,0.03)] shadow-xs"
+              />
+              {touched.price && errors.price && (
+                <span className="text-red-500 text-sm">{errors.price}</span>
+              )}
+            </div>{" "}
+            <div className="flex w-full gap-1 flex-col">
+              <label htmlFor="givenPrice" className="label">
+                Berilgan xizmat narxi
+              </label>
+              <input
+                type="number"
+                id="givenPrice"
+                value={values.givenPrice}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder=" Berilgan xizmat narxi"
+                className="flex  w-full  dark:bg-slate-500 outline-none p-[2px] px-[12px] py-1 md:py-1 justify-between items-center rounded-[8px] bg-[rgba(0,0,0,0.03)] shadow-xs"
+              />
+              {touched.givenPrice && errors.givenPrice && (
+                <span className="text-red-500 text-sm">
+                  {errors.givenPrice}
+                </span>
+              )}
+            </div>
           </div>
           <div className="flex w-full gap-1 flex-col">
             <label htmlFor="tel" className="label">
@@ -216,7 +256,6 @@ const AddModal = () => {
                 onChange={handleChange}
                 className="flex dark:text-white w-full dark:bg-slate-500 outline-none p-[2px] px-[12px] py-1 justify-between items-center rounded-[8px] bg-[rgba(0,0,0,0.03)] shadow-xs"
               >
-                <option value="">Tanlang...</option>
                 <option value="Alijon">Alijon</option>
                 <option value="Valijon">Valijon</option>
               </select>
@@ -270,7 +309,7 @@ const AddModal = () => {
             }}
             className="flex w-full items-center hover:bg-blue-600 hover:text-white duration-200 justify-center md:w-auto bg-blue-300 py-2 dark:text-blue-600 dark:hover:text-blue-100  font-semibold rounded-md text-[#3585ED] px-6"
           >
-            Qo&#39;shish
+            Saqlash
           </button>
           <button
             onClick={handleClose}
@@ -284,4 +323,4 @@ const AddModal = () => {
   );
 };
 
-export default AddModal;
+export default EditAppointment;

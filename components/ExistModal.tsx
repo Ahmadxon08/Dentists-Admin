@@ -1,16 +1,25 @@
 "use client";
 import useAppointmentStore from "@/store/useAppointmentStore";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const ExistingAppointmentModal = () => {
+  const router = useRouter();
+
   const {
     isExistingModalOpen,
     deleteAppointment,
     toggleExistingModal,
     existingAppointment,
+    forCurrencyUz,
   } = useAppointmentStore();
 
   if (!isExistingModalOpen || !existingAppointment) return null;
+
+  const handleProductClick = (id: any) => {
+    router.push(`bemorlar/${id}`);
+    toggleExistingModal();
+  };
 
   return (
     <div className="fixed inset-0 flex z-50 items-center justify-center bg-black bg-opacity-80">
@@ -43,11 +52,20 @@ const ExistingAppointmentModal = () => {
           </div>
           <div className="flex items-center w-full">
             <strong className="flex w-[50%]">Manzili:</strong>{" "}
-            <span>{existingAppointment.address}</span>
+            <span>
+              {" "}
+              {existingAppointment.address.length > 10
+                ? existingAppointment.address.slice(0, 10) + "..."
+                : existingAppointment.address}{" "}
+            </span>
+          </div>
+          <div className="flex items-center w-full">
+            <strong className="flex w-[50%]">Telefon raqami:</strong>{" "}
+            <span>{existingAppointment.tel}</span>
           </div>
           <div className="flex items-center w-full">
             <strong className="flex w-[50%]">Xizmat narxi:</strong>{" "}
-            <span>{existingAppointment.price}</span>
+            <span>{forCurrencyUz(existingAppointment.price)}</span>
           </div>
           <div className="flex items-center w-full">
             <strong className="flex w-[50%]">Qisqcha izoh:</strong>{" "}
@@ -78,7 +96,10 @@ const ExistingAppointmentModal = () => {
               Yopish
             </button>
 
-            <button className="mt-4 bg-slate-500 hover:bg-inherit text- dark:hover:bg-slate-800 border duration-300 border-gray-500 dark:hover:text-white  text-white hover:text-black px-1 py-1 rounded w-auto">
+            <button
+              onClick={() => handleProductClick(existingAppointment.id)}
+              className="mt-4 bg-slate-500 hover:bg-inherit text- dark:hover:bg-slate-800 border duration-300 border-gray-500 dark:hover:text-white  text-white hover:text-black px-1 py-1 rounded w-auto"
+            >
               Batafsil..
             </button>
           </div>

@@ -5,7 +5,8 @@ import ExistingAppointmentModal from "@/components/ExistModal";
 import { months } from "@/data/data";
 import useAppointmentStore from "@/store/useAppointmentStore";
 import useStore from "@/store/useStore";
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { use, useEffect, useState } from "react";
 
 const allDays = [
   "Yakshanba",
@@ -23,6 +24,7 @@ const Home = () => {
   const { toggleModal } = useStore();
   const { appointments, setAppointmentDate, setAppointmentTime } =
     useAppointmentStore();
+  const { setAppointments } = useAppointmentStore.getState();
 
   const [weekDays, setWeekDays] = useState<string[]>([]);
   const [view, setView] = useState<"week" | "month">("week");
@@ -40,7 +42,6 @@ const Home = () => {
     }
   }, [startHour]);
 
-  // endHour o'zgarganda localStorage'ga saqlash
   useEffect(() => {
     if (endHour) {
       localStorage.setItem("endHour", endHour);
@@ -129,12 +130,26 @@ const Home = () => {
     return false;
   };
 
+  const fetchAppointments = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/patients");
+      if (!res.data) return;
+
+      console.log(res.data);
+
+      setAppointments(res.data || res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppointments();
+  }, []);
   const removePastAppointments = () => {
     const now = new Date();
     const currentDate = now.toISOString().split("T")[0];
     const currentHour = now.getHours();
-
-    const { appointments, setAppointments } = useAppointmentStore.getState();
 
     const filteredAppointments = appointments.filter((app) => {
       const appHour = parseInt(app.appointmentTime.split(":")[0]);
@@ -143,6 +158,7 @@ const Home = () => {
         (app.appointmentDate === currentDate && appHour >= currentHour)
       );
     });
+    console.log("filterr", filteredAppointments);
 
     setAppointments(filteredAppointments);
   };

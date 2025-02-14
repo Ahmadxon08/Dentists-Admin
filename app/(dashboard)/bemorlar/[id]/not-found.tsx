@@ -12,7 +12,7 @@ export default function NotFoundPage() {
   const query = searchParams.get("query");
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-slate-800">
+    <div className="flex flex-col items-center justify-center h-full bg-gray-100 dark:bg-slate-800">
       <Image
         src={notFoundPage}
         alt=""

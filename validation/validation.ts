@@ -23,6 +23,13 @@ export const appointmentSchema = yup.object().shape({
     .number()
     .min(1000, "Narxi kamida 1000 sum  bo‘lishi kerak")
     .required("Narxi majburiy"),
+  tel: yup
+    .string()
+    .matches(
+      /^\+998\d{9}$/,
+      "Telefon raqamini to‘g‘ri kiriting (masalan: +998901234567)"
+    )
+    .required("Telefon raqami majburiy"),
   birthDate: yup
     .date()
     .max(new Date(), "Tug‘ilgan sana kelajak bo‘lishi mumkin emas")

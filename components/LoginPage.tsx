@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Snackbar, Alert } from "@mui/material";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -11,6 +12,7 @@ const LoginPage = () => {
   const [success, setSuccess] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -72,15 +74,28 @@ const LoginPage = () => {
           placeholder="username"
           className="p-2 w-full pl-2 dark:bg-slate-700 bg-blue-200 border-gray-300 rounded-md focus:outline-none"
           value={username}
-          onChange={(e) => setUsername(e.target.value)} // Bind the username to state
+          onChange={(e) => setUsername(e.target.value)}
         />
-        <input
-          type="password"
-          placeholder="password"
-          className="p-2 w-full pl-2 dark:bg-slate-700 bg-blue-200 border-gray-300 rounded-md focus:outline-none"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} // Bind the password to state
-        />
+        <div className="relative w-full">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Parol"
+            className="p-2 w-full pr-10 pl-2 dark:bg-slate-700 bg-blue-200 border-gray-300 rounded-md focus:outline-none"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-300"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <AiOutlineEyeInvisible size={20} />
+            ) : (
+              <AiOutlineEye size={20} />
+            )}
+          </button>
+        </div>
         <button
           type="submit"
           className="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
