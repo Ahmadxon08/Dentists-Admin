@@ -2,21 +2,11 @@
 import AddModal from "@/components/AddModal";
 import Auth from "@/components/Auth";
 import ExistingAppointmentModal from "@/components/ExistModal";
-import { months } from "@/data/data";
+import { allDays, months } from "@/data/data";
 import useAppointmentStore from "@/store/useAppointmentStore";
 import useStore from "@/store/useStore";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
-const allDays = [
-  "Yakshanba",
-  "Dushanba",
-  "Seshanba",
-  "Chorshanba",
-  "Payshanba",
-  "Juma",
-  "Shanba",
-];
 
 const Home = () => {
   const [startHour, setStartHour] = useState("");

@@ -16,7 +16,7 @@ const ExistingAppointmentModal = () => {
 
   if (!isExistingModalOpen || !existingAppointment) return null;
 
-  const handleProductClick = (id: number | string | undefined) => {
+  const handleProductClick = (id: string | number | undefined) => {
     router.push(`bemorlar/${id}`);
     toggleExistingModal();
   };

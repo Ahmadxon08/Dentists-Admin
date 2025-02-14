@@ -30,6 +30,15 @@ export const menuItems = [
     icon: <IoPerson size={28} />,
   },
 ];
+export const allDays = [
+  "Yakshanba",
+  "Dushanba",
+  "Seshanba",
+  "Chorshanba",
+  "Payshanba",
+  "Juma",
+  "Shanba",
+];
 
 export const months = [
   "Yanvar",

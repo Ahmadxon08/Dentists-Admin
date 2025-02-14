@@ -28,8 +28,6 @@ const QarzTableComponent = () => {
   );
 
   const totalPages = Math.ceil(paidAppointments.length / itemsPerPage);
-  console.log("Paid Appointments Length:", paidAppointments.length);
-  console.log("Total Pages:", totalPages);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;

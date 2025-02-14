@@ -40,7 +40,6 @@ const EditAppointment = () => {
 
   useEffect(() => {
     if (editAppointment) {
-      console.log("edit appointment", editAppointment);
       formik.setValues({
         firstName: editAppointment.firstName || "",
         lastName: editAppointment.lastName || "",

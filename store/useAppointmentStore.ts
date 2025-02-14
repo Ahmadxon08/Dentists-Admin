@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface Appointment {
-  id?: string | number | undefined;
+  id?: string | number;
   firstName: string;
   lastName: string;
   birthDate: string;

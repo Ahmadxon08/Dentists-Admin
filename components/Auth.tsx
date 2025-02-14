@@ -6,14 +6,16 @@ import { useRouter } from "next/navigation";
 const Auth = <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   const AuthComponent: React.FC<P> = (props) => {
     const router = useRouter();
+    const adminUser =
+      typeof window !== "undefined" ? localStorage.getItem("adminUser") : null;
 
     useEffect(() => {
-      const adminUser = localStorage.getItem("adminUser");
-
       if (!adminUser) {
-        router.push("/login");
+        router.replace("/login");
       }
-    }, [router]);
+    }, [adminUser, router]);
+
+    if (!adminUser) return null;
 
     return <WrappedComponent {...props} />;
   };
