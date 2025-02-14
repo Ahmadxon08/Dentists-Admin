@@ -65,8 +65,9 @@ const Sidebar = () => {
               href="/"
               className="flex pl-3  items-center justify-center lg:justify-start gap-2"
             >
-              <span className="hidden lg:block text-[#ADA4D0] text-[24px] font-bold">
+              <span className="hidden lg:flex text-[#ADA4D0] text-[20px] gap-4 w-full md:flex items-center font-bold">
                 <FaTooth size={28} className="text-[#ADA4D0]" />
+                SDC
               </span>
             </Link>
           )}
