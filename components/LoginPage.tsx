@@ -13,30 +13,31 @@ const LoginPage = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!username || !password) {
-      setError("Iltimos, foydalanuvchi nomi va parolni kiriting.");
+    const correctUsername = "admin";
+    const correctPassword = "123456";
+
+    if (username === correctUsername && password === correctPassword) {
+      const adminUser = {
+        username: username,
+        password: password,
+        role: "admin",
+      };
+
+      localStorage.setItem("adminUser", JSON.stringify(adminUser));
+
+      setError("");
+      setSuccess(true);
+      setOpenSnackbar(true);
+
+      router.push("/");
+    } else {
+      setError("Noto‘g‘ri foydalanuvchi nomi yoki parol.");
       setSuccess(false);
       setOpenSnackbar(true);
-      return;
     }
-
-    const adminUser = {
-      username: username,
-      password: password,
-      role: "admin",
-    };
-
-    localStorage.setItem("adminUser", JSON.stringify(adminUser));
-
-    setError("");
-    setSuccess(true);
-    setOpenSnackbar(true);
-
-    router.push("/");
   };
 
   const handleCloseSnackbar = () => {
