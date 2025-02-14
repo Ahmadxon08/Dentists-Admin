@@ -6,7 +6,7 @@ import { months } from "@/data/data";
 import useAppointmentStore from "@/store/useAppointmentStore";
 import useStore from "@/store/useStore";
 import axios from "axios";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const allDays = [
   "Yakshanba",
@@ -134,8 +134,6 @@ const Home = () => {
     try {
       const res = await axios.get("http://localhost:5000/patients");
       if (!res.data) return;
-
-      console.log(res.data);
 
       setAppointments(res.data || res.data);
     } catch (error) {

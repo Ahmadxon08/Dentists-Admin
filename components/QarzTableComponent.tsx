@@ -48,10 +48,8 @@ const QarzTableComponent = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleProductClick = (id: any) => {
+  const handleProductClick = (id: number | string | undefined) => {
     router.push(`qarzdorlar/${id}`);
-
-    console.log("detail ID", id);
   };
 
   return (

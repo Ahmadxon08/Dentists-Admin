@@ -37,7 +37,7 @@ const BemorlarTableComponent = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleProductClick = (id: any) => {
+  const handleProductClick = (id: number | string | undefined) => {
     router.push(`bemorlar/${id}`);
   };
 

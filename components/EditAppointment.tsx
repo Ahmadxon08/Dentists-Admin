@@ -12,7 +12,6 @@ const EditAppointment = () => {
     appointmentTime,
     updateAppointment,
     editAppointment,
-    forCurrencyUz,
   } = useAppointmentStore();
 
   const formik = useFormik({
@@ -21,7 +20,7 @@ const EditAppointment = () => {
       lastName: "",
       address: "",
       birthDate: "",
-      price: Number("1000"),
+      price: Number(""),
       givenPrice: Number(""),
       tel: "",
       description: "",
